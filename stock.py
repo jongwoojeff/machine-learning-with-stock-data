@@ -37,3 +37,6 @@ ax1.plot(df.index, df['100ma'])
 ax2.bar(df.index, df['Volume'])
 
 plt.show()
+
+#check changes
+#messing around
