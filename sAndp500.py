@@ -9,6 +9,11 @@ import pandas as pd
 # import pandas_datareader.data as web
 import yfinance as yf
 from pandas_datareader import data as pdr
+import matplotlib.pyplot as plt
+from matplotlib import style
+import numpy as np
+
+style.use('ggplot')
 
 yf.pdr_override()
 
@@ -82,5 +87,46 @@ def compile_data():
     print(main_df.head())
     main_df.to_csv('sp500_joined_closes.csv')
 
+# compile_data()
+def visualize_data():
+    df = pd.read_csv('sp500_joined_closes.csv')
+    df_corr = df.corr()
+    print(df_corr.head())
+    df_corr.to_csv('sp500corr.csv')
 
-compile_data()
+    #generate heatmap
+    data1 = df_corr.values
+    fig1 = plt.figure()
+    ax1 = fig1.add_subplot(111)
+
+    heatmap1 = ax1.pcolor(data1, cmap=plt.cm.RdYlGn)
+    fig1.colorbar(heatmap1)
+
+    ax1.set_xticks(np.arange(data1.shape[1]) + 0.5, minor=False)
+    ax1.set_yticks(np.arange(data1.shape[0]) + 0.5, minor=False)
+    ax1.invert_yaxis() #becomes easier to read if we flip y axis
+    ax1.xaxis.tick_top() #same reason as above
+    column_labels = df_corr.columns #add company names
+    row_labels = df_corr.index #column labels and row labels are identical
+    ax1.set_xticklabels(column_labels)
+    ax1.set_yticklabels(row_labels)
+    plt.xticks(rotation=90) #becomes easier to read labels
+    heatmap1.set_clim(-1,1)
+    plt.tight_layout()
+    plt.savefig("correlations.png", dpi = (300))
+    # plt.show()
+
+# visualize_data()
+
+# features = daily pricing changes of all companies
+def process_data_for_labels(ticker):
+    hm_days = 7
+    df = pd.read_csv('sp500_joined_closes.csv', index_col=0)
+    tickers = df.columns.values.tolist()
+    df.fillna(0, inplace=True)
+
+    for i in range(1,hm_days+1):
+        df['{}_{}d'.format(ticker,i)] = (df[ticker].shift(-i) - df[ticker]) / df[ticker]
+
+    df.fillna(0, inplace=True)
+    return tickers, df
