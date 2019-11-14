@@ -6,10 +6,13 @@ This is a Python based project and I highly recommend users to use [Anaconda pla
 
 ## Prerequisites
 1. A decent Python platform with fundamental Python Knowledge
-2. Python Modules
-- Numpy
-- Pandas
-- Pandas-datareader
-- Matplotlib
-- BeautifulSoup4
-- sklearn (scikit-learn)
+2. Basic API knowledge
+3. Python Modules
+   - Numpy
+   - Pandas
+   - Pandas-datareader
+   - Matplotlib
+   - BeautifulSoup4
+   - sklearn (scikit-learn)
+## Acknowledgement
+- [Sentdex](https://github.com/Sentdex)
