@@ -14,5 +14,6 @@ This is a Python based project and I highly recommend users to use [Anaconda pla
    - Matplotlib
    - BeautifulSoup4
    - sklearn (scikit-learn)
+   - yfinance (yahoo-finance)
 ## Acknowledgement
 - [Sentdex](https://github.com/Sentdex)
