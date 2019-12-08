@@ -33,6 +33,8 @@ Supervised with classified outputs (buy, hold, sell)
 5. Some normalized values will be infinite due to the 0 values that we've previously filled; convert these to NaNs and drop them later. 
 6. Our labels will be 1, 0, and -1 which indicate buy, hold, and sell.
 
+## Evaluation
+This model's accuracy varies roughly between 37% and 49% depending on the company we choose to predict. The results are not very satisfying and this could be due to multiple reasons. We have built a model using data from 505 different companies. Certainly, some companies have relationships and strong correlations with each other; however, in general, different companies behave diffrently and it is not easy to come up with a single general model for 505 different companies. I recommend grouping companies into industrial categories -such as tech, pharmacy, banking, and etc- and generate a model in each category to improve accuracy. 
 
 ## Acknowledgement
 - [Sentdex](https://github.com/Sentdex)
