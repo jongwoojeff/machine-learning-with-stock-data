@@ -20,7 +20,18 @@ This is a Python based project and I highly recommend you to use [Anaconda platf
 ### Model Type
 Supervised with classified outputs (buy, hold, sell)
 
+### Methods used
+1. cross_validation; allows us to create shuffled training and testing samples. This is important since we can avoid testing the alogrithm on the same data as we used for training.
+2. LinearSVC, KNeighborsClassifier, RandomForestClassifier; classifiers used to predict.
+3. VotingClassifier; lets all 3 classifiers above to vote on what each thinks the class is for the feature sets.
+
 ### Feature Engineering
+1. Remove unecessary data; we only need adj_close column since we want to predict based on previous closed values.
+2. Generate a correlation table to see if you can identify any relationships.
+3. Fill in the missing data with 0. Some companies may not have existed nor gone public in the time period we have chosen to get data.
+4. Our features are the pricing changes(in percentage) from the previous day for all companies. Therefore, we normalize it.
+5. Some normalized values will be infinite due to the 0 values that we've previously filled; convert these to NaNs and drop them later. 
+6. Our labels will be 1, 0, and -1 which indicate buy, hold, and sell.
 
 
 ## Acknowledgement
